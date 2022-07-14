@@ -76,6 +76,12 @@ function displayMovements(movements) {
 
 displayMovements(account1.movements);
 
+function calcDisplayBalance(movements) {
+  const balance = movements.reduce((acc, mov) => acc + mov, 0);
+  labelBalance.textContent = `${balance} EUR` 
+};
+calcDisplayBalance(account1.movements);
+
 function createUsernames(accs) {
   accs.forEach(function(acc){
     acc.username = acc.owner
@@ -85,7 +91,8 @@ function createUsernames(accs) {
       .join('');
   });
 };
-
 createUsernames(accounts)
-console.log(accounts);
+
+
+
 
