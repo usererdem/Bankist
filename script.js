@@ -62,7 +62,7 @@ const account3 = {
 
 const account4 = {
   owner: 'Sarah Smith',
-  movements: [430, 1000, 700, 50, 90],
+  movements: [430, 1000, 700, 50, 90, 2000, -1499.99, 9000],
   interestRate: 1,
   pin: 4444,
 
@@ -128,7 +128,15 @@ function formatMovementDate(date, locale) {
   const month = `${date.getMonth() + 1}`.padStart(2, 0);
   const year = date.getFullYear();
   return `${day}/${month}/${year}`; */
-  return new Intl.DateTimeFormat(locale).format(date)
+  return new Intl.DateTimeFormat(locale).format(date);
+}
+
+// takes the amount of money, where is the locale place and currency and formats it
+function formatCur(value, locale, currency) {
+  return new Intl.NumberFormat(locale, {
+    style: 'currency',
+    currency: currency,
+  }).format(value);
 }
 
 function displayMovements(acc, sort = false) {
@@ -144,10 +152,7 @@ function displayMovements(acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
-    const formattedMov = new Intl.NumberFormat(acc.locale, {
-      style: 'currency',
-      currency: acc.currency,
-    }).format(mov);
+    const formattedMov = formatCur(mov, acc.locale, acc.currency);
 
     const html = `
     <div class="movements__row">
@@ -165,19 +170,19 @@ function displayMovements(acc, sort = false) {
 
 function calcDisplayBalance(acc) {
   acc.balance = acc.movements.reduce((acc, mov) => acc + mov, 0);
-  labelBalance.textContent = `${acc.balance.toFixed(2)}€`;
+  labelBalance.textContent = formatCur(acc.balance, acc.locale, acc.currency);
 }
 
 function calcDisplaySummary(acc) {
   const incomes = acc.movements
     .filter(mov => mov > 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumIn.textContent = `${incomes.toFixed(2)}€`;
+  labelSumIn.textContent = formatCur(incomes, acc.locale, acc.currency);
 
   const out = acc.movements
     .filter(mov => mov < 0)
     .reduce((acc, mov) => acc + mov, 0);
-  labelSumOut.textContent = `${Math.abs(out).toFixed(2)}€`;
+  labelSumOut.textContent = formatCur(Math.abs(out), acc.locale, acc.currency);
 
   const interest = acc.movements
     .filter(mov => mov > 0)
@@ -187,7 +192,7 @@ function calcDisplaySummary(acc) {
       return int >= 1;
     })
     .reduce((acc, int) => acc + int, 0);
-  labelSumInterest.textContent = `${interest.toFixed(2)}€`;
+  labelSumInterest.textContent = formatCur(interest, acc.locale, acc.currency);
 }
 
 // Takes first letter of name last name and creates username
@@ -262,7 +267,7 @@ btnLogin.addEventListener('click', function (e) {
     /* const locale = navigator.language;
     console.log(locale);
     labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now); */
-    
+
     // http://www.lingoes.net/en/translator/langcode.htm
     // Can use this link to choose which timeline you want
     // replace new Intl.DateTimeFormat('tr-TR', options).format(now);
@@ -272,7 +277,6 @@ btnLogin.addEventListener('click', function (e) {
       options
     ).format(now);
 
-    
     // Old one
     /* const now = new Date();
     const day = `${now.getDate()}`.padStart(2, 0);
