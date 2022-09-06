@@ -17,7 +17,7 @@ const account1 = {
     '2022-09-05T10:51:36.790Z',
   ],
   currency: 'EUR',
-  locale: 'pt-PT', // de-DE
+  locale: 'tr-TR', // de-DE
 };
 
 const account2 = {
@@ -37,7 +37,7 @@ const account2 = {
     '2022-07-26T12:01:20.894Z',
   ],
   currency: 'USD',
-  locale: 'en-US',
+  locale: 'hr-HR',
 };
 
 const account3 = {
@@ -213,16 +213,16 @@ let currentAccount;
 currentAccount = account1;
 updateUI(currentAccount);
 containerApp.style.opacity = 100;
-demoAccount.style.display = 'none';
+demoAccount.style.display = 'none'; */
 
-const now = new Date();
+/* const now = new Date();
 const day = `${now.getDate()}`.padStart(2, 0);
 const month = `${now.getMonth() + 1}`.padStart(2, 0);
 const year = now.getFullYear();
 const hour = `${now.getHours()}`.padStart(2, 0);
 const min = `${now.getMinutes()}`.padStart(2, 0);
-labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
-// day/month/year */
+labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`; */
+// day/month/year
 
 btnLogin.addEventListener('click', function (e) {
   e.preventDefault();
@@ -241,14 +241,40 @@ btnLogin.addEventListener('click', function (e) {
     demoAccount.style.opacity = 0;
     demoAccount.style.display = 'none';
 
-    // Create current date and time
+    //// Create current date and time
     const now = new Date();
+    const options = {
+      hour: 'numeric',
+      minute: 'numeric',
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+      weekday: 'long',
+    };
+
+    // Finds your local language
+    /* const locale = navigator.language;
+    console.log(locale);
+    labelDate.textContent = new Intl.DateTimeFormat(locale, options).format(now); */
+    
+    // http://www.lingoes.net/en/translator/langcode.htm
+    // Can use this link to choose which timeline you want
+    // replace new Intl.DateTimeFormat('tr-TR', options).format(now);
+
+    labelDate.textContent = new Intl.DateTimeFormat(
+      currentAccount.locale,
+      options
+    ).format(now);
+
+    
+    // Old one
+    /* const now = new Date();
     const day = `${now.getDate()}`.padStart(2, 0);
     const month = `${now.getMonth() + 1}`.padStart(2, 0);
     const year = now.getFullYear();
     const hour = `${now.getHours()}`.padStart(2, 0);
     const min = `${now.getMinutes()}`.padStart(2, 0);
-    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`;
+    labelDate.textContent = `${day}/${month}/${year}, ${hour}:${min}`; */
 
     // Clear input fields
     inputLoginUsername.value = inputLoginPin.value = '';
