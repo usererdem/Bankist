@@ -113,7 +113,7 @@ const demoAccount = document.querySelector('.demo-login');
 
 ///////////////////////////////////////////////////////////////////////////
 //////////// Functions
-function formatMovementDate(date) {
+function formatMovementDate(date, locale) {
   const calcDaysPassed = (date1, date2) =>
     Math.round(Math.abs(date2 - date1) / (1000 * 60 * 60 * 24));
 
@@ -124,10 +124,11 @@ function formatMovementDate(date) {
   if (daysPassed === 1) return 'Yesterday';
   if (daysPassed <= 30) return `${daysPassed} days ago`;
 
-  const day = `${date.getDate()}`.padStart(2, 0);
+  /* const day = `${date.getDate()}`.padStart(2, 0);
   const month = `${date.getMonth() + 1}`.padStart(2, 0);
   const year = date.getFullYear();
-  return `${day}/${month}/${year}`;
+  return `${day}/${month}/${year}`; */
+  return new Intl.DateTimeFormat(locale).format(date)
 }
 
 function displayMovements(acc, sort = false) {
@@ -141,7 +142,7 @@ function displayMovements(acc, sort = false) {
     const type = mov > 0 ? 'deposit' : 'withdrawal';
 
     const date = new Date(acc.movementsDates[i]);
-    const displayDate = formatMovementDate(date);
+    const displayDate = formatMovementDate(date, acc.locale);
 
     const html = `
     <div class="movements__row">
