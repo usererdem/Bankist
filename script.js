@@ -2,7 +2,7 @@
 // Data
 const account1 = {
   owner: 'Erdem Elvan',
-  movements: [200, 450, -400, 3000, -650, -130, 70, 1300],
+  movements: [200, 450, -400, 3000, -650, -134.99, 70, 1300],
   interestRate: 1.2, // %
   pin: 1111,
 
@@ -16,13 +16,13 @@ const account1 = {
     '2022-09-03T23:36:17.929Z',
     '2022-09-05T10:51:36.790Z',
   ],
-  currency: 'EUR',
+  currency: 'TRY',
   locale: 'tr-TR', // de-DE
 };
 
 const account2 = {
   owner: 'Onur Elvan',
-  movements: [5000, 3400, -150, -790, -3210, -1000, 8500, -30],
+  movements: [5000, 3400, -150, -790, -3099.99, -1000, 8500, -29.99],
   interestRate: 1.5,
   pin: 2222,
 
@@ -36,13 +36,13 @@ const account2 = {
     '2022-06-25T18:49:59.371Z',
     '2022-07-26T12:01:20.894Z',
   ],
-  currency: 'USD',
+  currency: 'EUR',
   locale: 'hr-HR',
 };
 
 const account3 = {
   owner: 'Jonas Schmedtmann',
-  movements: [200, -200, 340, -300, -20, 50, 400, -460],
+  movements: [200, -249.99, 340, -300, -19.99, 50, 400, -460],
   interestRate: 0.7,
   pin: 3333,
 
@@ -56,7 +56,7 @@ const account3 = {
     '2022-07-11T23:36:17.929Z',
     '2022-07-12T10:51:36.790Z',
   ],
-  currency: 'EUR',
+  currency: 'USD',
   locale: 'pt-PT', // de-DE
 };
 
@@ -144,13 +144,18 @@ function displayMovements(acc, sort = false) {
     const date = new Date(acc.movementsDates[i]);
     const displayDate = formatMovementDate(date, acc.locale);
 
+    const formattedMov = new Intl.NumberFormat(acc.locale, {
+      style: 'currency',
+      currency: acc.currency,
+    }).format(mov);
+
     const html = `
     <div class="movements__row">
           <div class="movements__type movements__type--${type}">${
       i + 1
     } ${type}</div>
           <div class="movements__date">${displayDate}</div>
-          <div class="movements__value">${mov.toFixed(2)}€</div>
+          <div class="movements__value">${formattedMov}</div>
     </div>
     `;
 
