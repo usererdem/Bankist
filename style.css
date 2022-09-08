@@ -4,7 +4,7 @@
  * Have fun! 😁
  */
 
- * {
+* {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
@@ -16,7 +16,7 @@ html {
 }
 
 body {
-  font-family: "Poppins", sans-serif;
+  font-family: 'Poppins', sans-serif;
   color: #444;
   background-color: #f3f3f3;
   height: 100vh;
@@ -101,10 +101,10 @@ nav {
 /* Demo Login */
 .demo-login {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  top: 10%;
+  right: 8%;
   transition: opacity 1s ease-in-out;
-  transform: translate(-50%, -50%);
+  /* transform: translate(-50%, -50%); */
   opacity: 1;
 }
 
@@ -318,4 +318,54 @@ h2 {
 
 .timer {
   font-weight: 600;
+}
+
+input::-webkit-input-placeholder {
+  opacity: 0.4; /*Change the opacity between 0 and 1*/
+}
+
+/* Media Queries */
+
+/* // Tab Land -- 900-1200px */
+/* @media (max-width: 75em) {
+} */
+
+/* // Tab Port -- 600-900px */
+@media (max-width: 56.25em) {
+  .demo-login {
+    right: 12%;
+  }
+
+  .app {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .summary {
+    flex-wrap: wrap;
+  }
+
+  .movements__row {
+    padding: 2.25rem 2rem;
+  }
+}
+
+/* // Phone -- 600px- */
+@media (max-width: 37.5em) {
+  nav {
+    padding: 0;
+    flex-wrap: wrap;
+  }
+
+  .demo-login {
+    top: 15%;
+    right: 50%;
+  }
+}
+
+/* // Big Desktop -- 1400px+ */
+@media (min-width: 87.5em) {
+  .demo-login {
+    right: 5%;
+  }
 }
