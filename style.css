@@ -88,7 +88,7 @@ nav {
   position: relative;
   max-width: 100rem;
   margin: 4rem auto;
-  display: grid;
+  display: none;
   grid-template-columns: 4fr 3fr;
   grid-template-rows: auto repeat(3, 15rem) auto;
   gap: 2rem;
@@ -103,7 +103,7 @@ nav {
   position: absolute;
   top: 10%;
   right: 8%;
-  transition: opacity 1s ease-in-out;
+  transition: opacity 0.4s ease-in-out;
   /* transform: translate(-50%, -50%); */
   opacity: 1;
 }

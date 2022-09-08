@@ -16,7 +16,7 @@ const account1 = {
     '2022-09-03T23:36:17.929Z',
     '2022-09-05T10:51:36.790Z',
   ],
-  currency: 'TRY',
+  currency: 'EUR',
   locale: 'tr-TR', // de-DE
 };
 
@@ -56,7 +56,7 @@ const account3 = {
     '2022-07-11T23:36:17.929Z',
     '2022-07-12T10:51:36.790Z',
   ],
-  currency: 'USD',
+  currency: 'EUR',
   locale: 'pt-PT', // de-DE
 };
 
@@ -76,7 +76,7 @@ const account4 = {
     '2022-06-25T18:49:59.371Z',
     '2022-09-05T12:01:20.894Z',
   ],
-  currency: 'USD',
+  currency: 'EUR',
   locale: 'en-US',
 };
 
@@ -272,13 +272,28 @@ btnLogin.addEventListener('click', function (e) {
   //console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    // Display UI and message
-    labelWelcome.textContent = `Welcome back, ${
-      currentAccount.owner.split(' ')[0]
-    }`;
-    containerApp.style.opacity = 100;
+    setTimeout(() => {
+      // Display UI and message
+      labelWelcome.textContent = `Welcome back, ${
+        currentAccount.owner.split(' ')[0]
+      }`;
+    }, 400);
+
+    if (window.innerWidth >= 600) {
+      containerApp.style.display = 'grid';
+    }
+    if (window.innerWidth < 600) {
+      containerApp.style.display = 'flex';
+    }
+
+    setTimeout(() => {
+      containerApp.style.opacity = 100;
+    }, 450);
+
     demoAccount.style.opacity = 0;
-    demoAccount.style.display = 'none';
+    setTimeout(() => {
+      demoAccount.style.display = 'none';
+    }, 400);
 
     //// Create current date and time
     const now = new Date();
