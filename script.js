@@ -218,7 +218,7 @@ function updateUI(acc) {
 
 function startLogOutTimer() {
   // Set time to 5 minutes
-  let time = 120;
+  let time = 300;
   const tick = () => {
     const min = `${Math.trunc(time / 60)}`.padStart(2, 0);
     const sec = `${time % 60}`.padStart(2, 0);
