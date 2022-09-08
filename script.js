@@ -272,12 +272,11 @@ btnLogin.addEventListener('click', function (e) {
   //console.log(currentAccount);
 
   if (currentAccount?.pin === Number(inputLoginPin.value)) {
-    setTimeout(() => {
-      // Display UI and message
-      labelWelcome.textContent = `Welcome back, ${
-        currentAccount.owner.split(' ')[0]
-      }`;
-    }, 400);
+    // Display UI and message
+    labelWelcome.textContent = `Welcome back, ${
+      currentAccount.owner.split(' ')[0]
+    }`;
+    
 
     if (window.innerWidth >= 600) {
       containerApp.style.display = 'grid';
