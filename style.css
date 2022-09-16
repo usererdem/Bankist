@@ -68,15 +68,33 @@ nav {
 
 .login__btn {
   border: none;
-  background: none;
+  background: linear-gradient(
+    45deg,
+    #7ed56f, #28b485/* , #2998ff,
+    #5643fa */
+  );
   font-size: 2.2rem;
   color: inherit;
   cursor: pointer;
   transition: all 0.3s;
+  padding: 0.5rem 2rem;
+  border-radius: 2rem;
+  color: #fff;
 }
 
+.login__input:hover,
+.login__input:focus,
 .login__btn:hover,
-.login__btn:focus,
+.login__btn:focus {
+  translate: 0px -1px;
+  box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+}
+
+.login__btn:active {
+  translate: 0px 1px;
+  box-shadow: 0 .5rem 2rem rgba(0, 0, 0, 0.15)
+}
+
 .btn--sort:hover,
 .btn--sort:focus {
   outline: none;
@@ -355,11 +373,12 @@ input::-webkit-input-placeholder {
   nav {
     padding: 0;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .demo-login {
-    top: 15%;
-    right: 50%;
+    top: 25%;
+    right: 40%;
   }
 }
 
